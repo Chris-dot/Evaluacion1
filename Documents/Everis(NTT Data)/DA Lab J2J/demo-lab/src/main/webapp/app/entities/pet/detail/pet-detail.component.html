@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="pet">
+      <h2 data-cy="petDetailsHeading"><span appTranslate="petclinicApp.pet.detail.title">Pet</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ pet.id }}</span>
+        </dd>
+        <dt><span appTranslate="petclinicApp.pet.name">Name</span></dt>
+        <dd>
+          <span>{{ pet.name }}</span>
+        </dd>
+        <dt><span appTranslate="petclinicApp.pet.birthDate">Birth Date</span></dt>
+        <dd>
+          <span>{{ pet.birthDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span appTranslate="petclinicApp.pet.owner">Owner</span></dt>
+        <dd>
+          <div *ngIf="pet.owner">
+            <a [routerLink]="['/owner', pet.owner?.id, 'view']">{{ pet.owner?.firstName }}</a>
+          </div>
+        </dd>
+        <dt><span appTranslate="petclinicApp.pet.type">Type</span></dt>
+        <dd>
+          <div *ngIf="pet.type">
+            <a [routerLink]="['/type', pet.type?.id, 'view']">{{ pet.type?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/pet', pet.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

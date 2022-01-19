@@ -1,0 +1,32 @@
+{
+  "name": "VetSpecialtie",
+  "fields": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "vet",
+      "otherEntityRelationshipName": "specialtie",
+      "relationshipValidateRules": "required",
+      "relationshipName": "vet",
+      "otherEntityField": "firstName"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "specialtie",
+      "otherEntityRelationshipName": "vetSpecialtie",
+      "relationshipValidateRules": "required",
+      "relationshipName": "specialtie",
+      "otherEntityField": "name"
+    }
+  ],
+  "entityTableName": "vet_specialtie",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["petclinic"],
+  "changelogDate": "20220118135741"
+}

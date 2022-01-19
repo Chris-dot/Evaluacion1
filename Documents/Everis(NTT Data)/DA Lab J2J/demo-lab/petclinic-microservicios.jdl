@@ -1,0 +1,167 @@
+/**
+ * The application configuration.
+ * @author Edilmar Silva Torres
+ */
+application {
+     config {
+         baseName petclinic
+         applicationType gateway
+         serverPort 8080
+         packageName cl.nttdata.petclinic
+         authenticationType jwt
+         enableTranslation true
+         nativeLanguage	es
+         languages [es]
+         jhiPrefix app
+         buildTool gradle
+         databaseType sql
+         prodDatabaseType postgresql
+         devDatabaseType postgresql
+         clientFramework angularX
+         serviceDiscoveryType no
+         skipServer true
+        //  useSass true
+     }
+     entities *
+ }
+
+application {
+     config {
+         baseName petclinicgw
+         applicationType gateway
+         serverPort 8080
+         packageName cl.nttdata.petclinic
+         authenticationType jwt
+         enableTranslation true
+         nativeLanguage	es
+         languages [es]
+         jhiPrefix app
+         buildTool gradle
+         databaseType sql
+         prodDatabaseType postgresql
+         devDatabaseType postgresql
+         clientFramework angularX
+         serviceDiscoveryType no
+         skipClient true
+     }
+ }
+
+ application {
+     config {
+         baseName vetms
+         applicationType microservice
+         serverPort 8080
+         packageName cl.nttdata.petclinic
+         authenticationType jwt
+         enableTranslation true
+         nativeLanguage	es
+         languages [es]
+         buildTool gradle
+         databaseType sql
+         prodDatabaseType postgresql
+         devDatabaseType postgresql
+         serviceDiscoveryType no
+     }
+     entities Vet, Specialtie, VetSpecialtie
+ }
+
+ application {
+     config {
+         baseName petms
+         applicationType microservice
+         serverPort 8080
+         packageName cl.nttdata.petclinic
+         authenticationType jwt
+         enableTranslation true
+         nativeLanguage	es
+         languages [es]
+         buildTool gradle
+         databaseType sql
+         prodDatabaseType postgresql
+         devDatabaseType postgresql
+         serviceDiscoveryType no
+     }
+     entities Type, Pet, Owner
+ }
+
+  application {
+     config {
+         baseName visitms
+         applicationType microservice
+         serverPort 8080
+         packageName cl.nttdata.petclinic
+         authenticationType jwt
+         enableTranslation true
+         nativeLanguage	es
+         languages [es]
+         buildTool gradle
+         databaseType sql
+         prodDatabaseType postgresql
+         devDatabaseType postgresql
+         serviceDiscoveryType no
+     }
+     entities Visit
+ }
+
+deployment {
+  deploymentType kubernetes
+  appsFolders [petclinic]
+  dockerRepositoryName "edisito83"
+  serviceDiscoveryType no
+}
+
+ deployment {
+  deploymentType kubernetes
+  appsFolders [vetms, petms, visitms, petclinicgw]
+  dockerRepositoryName "edisito83"
+  serviceDiscoveryType no
+  kubernetesServiceType Ingress
+  kubernetesNamespace petclinic
+  ingressDomain "petclinic.databin.cl"
+}
+
+entity Vet {
+    firstName String maxlength(30) required
+    lastName String maxlength(30) required
+}
+
+entity Specialtie {
+    name String maxlength(80) required
+}
+
+entity VetSpecialtie {
+}
+
+entity Type {
+    name String maxlength(80) required
+}
+
+entity Owner {
+    firstName String maxlength(30) required
+    lastName String maxlength(30) required
+    address String maxlength(255) required
+    city String maxlength(80) required
+    telephone String maxlength(20) required
+}
+
+entity Pet {
+    name String maxlength(30) required
+    birthDate LocalDate required
+}
+
+entity Visit {
+    visitDate LocalDate required
+    description String maxlength(255) required
+    petId Long required
+}
+
+relationship ManyToOne {
+    Pet{owner(firstName) required} to Owner{pet}
+    Pet{type(name) required} to Type
+    VetSpecialtie{vet(firstName) required} to Vet{specialtie}
+    VetSpecialtie{specialtie(name) required} to Specialtie
+}
+
+dto all with mapstruct
+service all with serviceImpl
+paginate all with pagination

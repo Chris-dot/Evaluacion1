@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="client">
+      <h2 data-cy="clientDetailsHeading"><span appTranslate="demoApp.client.detail.title">Client</span></h2>
+
+      <hr />
+
+      <app-alert-error></app-alert-error>
+
+      <app-alert></app-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span appTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ client.id }}</span>
+        </dd>
+        <dt><span appTranslate="demoApp.client.firstName">First Name</span></dt>
+        <dd>
+          <span>{{ client.firstName }}</span>
+        </dd>
+        <dt><span appTranslate="demoApp.client.lastName">Last Name</span></dt>
+        <dd>
+          <span>{{ client.lastName }}</span>
+        </dd>
+        <dt><span appTranslate="demoApp.client.addressName">Address Name</span></dt>
+        <dd>
+          <span>{{ client.addressName }}</span>
+        </dd>
+        <dt><span appTranslate="demoApp.client.cellphoneNumber">Cellphone Number</span></dt>
+        <dd>
+          <span>{{ client.cellphoneNumber }}</span>
+        </dd>
+        <dt><span appTranslate="demoApp.client.email">Email</span></dt>
+        <dd>
+          <span>{{ client.email }}</span>
+        </dd>
+        <dt><span appTranslate="demoApp.client.address">Address</span></dt>
+        <dd>
+          <div *ngIf="client.address">
+            <a [routerLink]="['/address', client.address?.id, 'view']">{{ client.address?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/client', client.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

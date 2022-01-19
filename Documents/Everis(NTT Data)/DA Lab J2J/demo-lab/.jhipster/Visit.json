@@ -1,0 +1,36 @@
+{
+  "name": "Visit",
+  "fields": [
+    {
+      "fieldName": "visitDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "255"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "pet",
+      "otherEntityRelationshipName": "visit",
+      "relationshipValidateRules": "required",
+      "relationshipName": "pet",
+      "otherEntityField": "name"
+    }
+  ],
+  "entityTableName": "visit",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["petclinic"],
+  "changelogDate": "20220118140141"
+}

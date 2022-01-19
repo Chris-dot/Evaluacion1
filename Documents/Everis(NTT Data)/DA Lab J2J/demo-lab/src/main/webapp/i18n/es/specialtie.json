@@ -1,0 +1,24 @@
+{
+  "petclinicApp": {
+    "specialtie": {
+      "home": {
+        "title": "Specialties",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Specialtie",
+        "createOrEditLabel": "Crear o editar Specialtie",
+        "notFound": "Ningún Specialties encontrado"
+      },
+      "created": "Un nuevo Specialtie ha sido creado con el identificador {{ param }}",
+      "updated": "Un Specialtie ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Specialtie ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Specialtie {{ id }}?"
+      },
+      "detail": {
+        "title": "Specialtie"
+      },
+      "id": "ID",
+      "name": "Name"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+/**
+ * The application configuration.
+ * @author Edilmar Silva Torres
+ */
+application {
+     config {
+         baseName demo
+         applicationType monolith
+         packageName cl.nttdata.demo
+         serviceDiscoveryType no
+         authenticationType jwt
+         enableTranslation true
+         nativeLanguage	es
+         languages [es]
+         jhiPrefix app
+         buildTool gradle
+         databaseType sql
+         prodDatabaseType postgresql
+         devDatabaseType postgresql
+         clientFramework angularX
+        //  useSass true
+     }
+     entities *
+ }
+
+entity Client {
+    firstName String maxlength(30) required
+    lastName String maxlength(30) required
+    addressName String maxlength(50) required
+    cellphoneNumber Long required
+    email String maxlength(50) required
+}
+
+entity Address {
+    name String maxlength(50) required
+    number Integer required
+    commune String maxlength(50) required
+}
+
+relationship OneToOne {
+    Client{address(name) required} to Address
+}
+
+
+
+dto all with mapstruct
+service all with serviceImpl
+paginate all with pagination

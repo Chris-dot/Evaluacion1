@@ -1,0 +1,70 @@
+/**
+ * The application configuration.
+ * @author Edilmar Silva Torres
+ */
+application {
+     config {
+         baseName petclinic
+         applicationType monolith
+         packageName cl.nttdata.petclinic
+         serviceDiscoveryType no
+         authenticationType jwt
+         enableTranslation true
+         nativeLanguage	es
+         languages [es]
+         jhiPrefix app
+         buildTool gradle
+         databaseType sql
+         prodDatabaseType postgresql
+         devDatabaseType postgresql
+         clientFramework angularX
+        //  useSass true
+     }
+     entities *
+ }
+
+entity Vet {
+    firstName String maxlength(30) required
+    lastName String maxlength(30) required
+}
+
+entity Specialtie {
+    name String maxlength(80) required
+}
+
+entity VetSpecialtie {
+}
+
+entity Type {
+    name String maxlength(80) required
+}
+
+entity Owner {
+    firstName String maxlength(30) required
+    lastName String maxlength(30) required
+    address String maxlength(255) required
+    city String maxlength(80) required
+    telephone String maxlength(20) required
+}
+
+entity Pet {
+    name String maxlength(30) required
+    birthDate LocalDate required
+}
+
+entity Visit {
+    visitDate LocalDate required
+    description String maxlength(255) required
+}
+
+relationship ManyToOne {
+    Visit{pet(name) required} to Pet{visit}
+    Pet{owner(firstName) required} to Owner{pet}
+    Pet{type(name) required} to Type
+    VetSpecialtie{vet(firstName) required} to Vet{specialtie}
+    VetSpecialtie{specialtie(name) required} to Specialtie
+}
+
+dto all with mapstruct
+service all with serviceImpl
+paginate all with pagination

@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="app-vet-specialtie-heading"
+        data-cy="VetSpecialtieCreateUpdateHeading"
+        appTranslate="petclinicApp.vetSpecialtie.home.createOrEditLabel"
+      >
+        Create or edit a Vet Specialtie
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" appTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="petclinicApp.vetSpecialtie.vet" for="field_vet">Vet</label>
+          <select class="form-control" id="field_vet" data-cy="vet" name="vet" formControlName="vet">
+            <option *ngIf="!editForm.get('vet')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="vetOption.id === editForm.get('vet')!.value?.id ? editForm.get('vet')!.value : vetOption"
+              *ngFor="let vetOption of vetsSharedCollection; trackBy: trackVetById"
+            >
+              {{ vetOption.firstName }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['vet'])!.invalid && (editForm.get(['vet'])!.dirty || editForm.get(['vet'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['vet'])?.errors?.required" appTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" appTranslate="petclinicApp.vetSpecialtie.specialtie" for="field_specialtie">Specialtie</label>
+          <select class="form-control" id="field_specialtie" data-cy="specialtie" name="specialtie" formControlName="specialtie">
+            <option *ngIf="!editForm.get('specialtie')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="
+                specialtieOption.id === editForm.get('specialtie')!.value?.id ? editForm.get('specialtie')!.value : specialtieOption
+              "
+              *ngFor="let specialtieOption of specialtiesSharedCollection; trackBy: trackSpecialtieById"
+            >
+              {{ specialtieOption.name }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="editForm.get(['specialtie'])!.invalid && (editForm.get(['specialtie'])!.dirty || editForm.get(['specialtie'])!.touched)"
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['specialtie'])?.errors?.required"
+            appTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

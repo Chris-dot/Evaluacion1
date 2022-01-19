@@ -1,0 +1,25 @@
+{
+  "petclinicApp": {
+    "vetSpecialtie": {
+      "home": {
+        "title": "Vet Specialties",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Vet Specialtie",
+        "createOrEditLabel": "Crear o editar Vet Specialtie",
+        "notFound": "Ningún Vet Specialties encontrado"
+      },
+      "created": "Un nuevo Vet Specialtie ha sido creado con el identificador {{ param }}",
+      "updated": "Un Vet Specialtie ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Vet Specialtie ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Vet Specialtie {{ id }}?"
+      },
+      "detail": {
+        "title": "Vet Specialtie"
+      },
+      "id": "ID",
+      "vet": "Vet",
+      "specialtie": "Specialtie"
+    }
+  }
+}

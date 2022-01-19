@@ -1,0 +1,22 @@
+{
+  "name": "Type",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "required"],
+      "fieldValidateRulesMaxlength": "80"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "type",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["petclinic"],
+  "changelogDate": "20220118135841"
+}
